@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+@import "@heroui/styles"; 
+
+@theme {
+  --font-title: "Elms Sans", sans-serif; 
+  --font-default: "Roboto", sans-serif;
+  --font-home: "Modak", sans-serif;
+    --font-hometwo: "Anton", sans-serif;
+    --font-homethree: "Manrope", sans-serif;
+}
+
+@theme {
+  --animate-appear: appear 1s ease-in-out 1;
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    } 
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
