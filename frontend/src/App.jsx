@@ -6,6 +6,7 @@ import DesktopSidebar from "./components/DesktopSidebar"
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import FoldersPage from "./pages/FoldersPage";
+import AddTodoModal from "./components/AddTodoModal";
 
 
 const App = () => {
