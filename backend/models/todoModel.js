@@ -6,6 +6,14 @@ const todoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: Boolean,
+      required: true,
+    },
+    folder: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
