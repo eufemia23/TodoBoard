@@ -40,10 +40,10 @@ const TasksPage = () => {
       )}
 
       <div className="flex justify-center mt-10 ">
-        <div className="bg-white w-2/3 max-w-150 min-h-150 rounded-lg shadow-lg px-10 py-5 animate-appear">
+        <div className="bg-white w-9/10 md:w-2/3 max-w-150 min-h-150 rounded-lg shadow-lg px-10 py-5 animate-appear">
           <div className="text-[20px] mb-5 font-title">My Tasks</div>
 
-          <Tabs className="w-full max-w-md font-default">
+          <Tabs className="w-full max-w-130 font-default">
             <Tabs.ListContainer>
               <Tabs.List aria-label="Options">
                 <Tabs.Tab id="overview">

@@ -36,7 +36,7 @@ const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
           ref={modalRef}
           onClick={closeModal}
         >
-          <div className="bg-white w-1/2 max-w-130 min-h-110 rounded-lg shadow-lg mx-auto mt-37 relative pl-5">
+          <div className="bg-white w-8/10 md:w-1/2 max-w-130 min-h-110 rounded-lg shadow-lg mx-auto mt-37 relative pl-5">
             <button
               onClick={onClose}
               className="hover:bg-gray-200 hover:cursor-pointer transition duration-300 ease-smooth rounded-full hover:scale-110 absolute right-1 top-1"
