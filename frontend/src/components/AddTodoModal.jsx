@@ -1,8 +1,10 @@
 import { X } from "lucide-react"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import api from "../lib/axios";
 
 
 const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
+
   const modalRef = useRef();
 
   const closeModal = (e) => {
@@ -14,20 +16,31 @@ const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isWarningDisplayed, setIsWarningDisplayed] = useState(false)
 
+  const status = false;
+  const folder = "first folder"
+
    
 
 
    const handleSubmit = async (e) => {
-    e.preventDefault(); //prevents default behavior = the page usually reloads after clicking the submit button and re-sets the input fields to empty
-
-    //trim() prevents the user from just putting a space and having it work
+    e.preventDefault();
     if (!content.trim()) {
       setIsWarningDisplayed(true)
       return;
     }
+    setIsLoading(true)
+    try {
+      await api.post("/todos", {content, status, folder});
+      onClose()
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
    }
 
   
+
   return (
     <>
       {isModalOpen && (

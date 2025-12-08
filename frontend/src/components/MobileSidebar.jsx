@@ -6,38 +6,25 @@ import {
   House,
   LogOut,
   Menu,
-  MessageCircleQuestionMark,
-  Plus,
-  Settings,
-  ListCheck,
   ClipboardList,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
-import AddTodoModal from "../components/AddTodoModal"
+
 
 const MobileSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleExpandClick = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleAddTodo = () => {
-    setIsModalOpen(true);
-    setIsExpanded(!isExpanded);
-  };
+ 
 
   return (
     <div>
-      {isModalOpen && (
-        <AddTodoModal
-          setIsModalOpen={setIsModalOpen}
-          isModalOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
+      
 
       <div
         className={` fixed bg-white  shadow-sm shadow-gray-300   ${
@@ -81,16 +68,7 @@ const MobileSidebar = () => {
                   </div>
                 </Link>
 
-                <div className="border-b border-b-gray-200 px-1 py-2 ">
-                  <button
-                    className="hover:bg-indigo-800/30 hover:cursor-pointer transition duration-300 ease-smooth px-1 py-1 rounded-full hover:scale-110 inline-flex"
-                    onClick={handleAddTodo}
-                  >
-                    <Plus strokeWidth={1.3} className="" />
-
-                    <div className="w-24 ">Add Task</div>
-                  </button>
-                </div>
+                
 
                 <Link to={"/folders"} onClick={handleExpandClick}>
                   <div className="border-b border-b-gray-200 px-1 py-2">
@@ -116,7 +94,7 @@ const MobileSidebar = () => {
                 <div className="border-b border-b-gray-200 px-1 py-2 ">
                   <button
                     className="hover:bg-indigo-800/30 hover:cursor-pointer transition duration-300 ease-smooth px-1 py-1 rounded-full hover:scale-110 inline-flex"
-                    onClick={handleAddTodo}
+                    
                   >
                     <LogOut strokeWidth={1.3} className="" />
 

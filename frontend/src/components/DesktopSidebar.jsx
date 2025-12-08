@@ -5,39 +5,25 @@ import {
   FolderClosed,
   House,
   LogOut,
-  Menu,
-  MessageCircleQuestionMark,
-  Plus,
-  Settings,
-  ListCheck,
   ClipboardList,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
-import AddTodoModal from "./AddTodoModal";
+
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+
 
   const handleExpandClick = () => {
     setIsExpanded(!isExpanded)
   }
 
- const handleAddTodo = () => {
-   setIsModalOpen(true);
- };
 
 
   return (
     <div>
-      {isModalOpen && (
-        <AddTodoModal
-          setIsModalOpen={setIsModalOpen}
-          isModalOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
+      
       <div
         className={`fixed bg-white min-h-screen  rounded-lg shadow-lg shadow-gray-300 pt-3 font-title flex flex-col justify-between transition-[width] duration-300 ease-in-out ${
           isExpanded ? "w-40 lg:w-50" : "w-14"
@@ -79,17 +65,7 @@ const Sidebar = () => {
             </div>
           </Link>
 
-          <div className="border-b border-b-gray-200 px-3 py-2 ">
-            <button
-              className="hover:bg-indigo-800/30 hover:cursor-pointer transition duration-300 ease-smooth px-1 py-1 rounded-full hover:scale-110 inline-flex"
-              onClick={handleAddTodo}
-            >
-              <Plus strokeWidth={1.3} className="" />
-              {isExpanded && (
-                <div className="w-24 animate-appear">Add Task</div>
-              )}
-            </button>
-          </div>
+          
 
           <Link to={"/folders"}>
             <div className="border-b border-b-gray-200 px-3 py-2">

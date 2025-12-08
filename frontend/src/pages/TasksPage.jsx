@@ -1,6 +1,6 @@
 import Task from "../components/Task";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../lib/axios";
 import { Tabs } from "@heroui/react";
 import { PlusIcon } from "lucide-react";
 import AddTodoModal from "../components/AddTodoModal";
@@ -9,16 +9,39 @@ const TasksPage = () => {
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
-   const handleAddTodo = () => {
-     setIsModalOpen(true);
-   };
+  const handleAddTodo = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleTaskUpdate = (updatedTask) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo._id === updatedTask._id ? updatedTask : todo
+      )
+    );
+   
+  };
+
+  const handleTaskDelete = async (deletedTodo) => {
+    setTodos((prev) => prev.filter((t) => t._id !== deletedTodo._id));
+    try {
+      const res = await api.get("/todos");
+      setTodos(res.data);
+    } catch (err) {
+      console.error("Error refetching todos after delete", err);
+    }
+  };
+
+ 
+  
 
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/todos");
+        const res = await api.get("/todos");
         setTodos(res.data);
       } catch (error) {
         console.log("Error fetching notes", error);
@@ -27,14 +50,14 @@ const TasksPage = () => {
       }
     };
     fetchTodos();
-  }, []);
+  }, [isModalOpen]);
 
   return (
     <div>
       {isModalOpen && (
         <AddTodoModal
-          setIsModalOpen={setIsModalOpen}
-          isModalOpen={isModalOpen}
+          setIsModalOpen
+          isModalOpen
           onClose={() => setIsModalOpen(false)}
         />
       )}
@@ -43,38 +66,57 @@ const TasksPage = () => {
         <div className="bg-white w-9/10 md:w-2/3 max-w-150 min-h-150 rounded-lg shadow-lg px-10 py-5 animate-appear">
           <div className="text-[20px] mb-5 font-title">My Tasks</div>
 
-          <Tabs className="w-full max-w-130 font-default">
+          <Tabs className="w-full max-w-130 font-default" >
             <Tabs.ListContainer>
               <Tabs.List aria-label="Options">
-                <Tabs.Tab id="overview">
+                <Tabs.Tab id="todo">
                   To Do
                   <Tabs.Indicator />
                 </Tabs.Tab>
 
-                <Tabs.Tab id="reports">
+                <Tabs.Tab id="done">
                   Done
                   <Tabs.Indicator />
                 </Tabs.Tab>
               </Tabs.List>
             </Tabs.ListContainer>
-            <Tabs.Panel className="pt-4" id="overview">
-              <p>View your project overview and recent activity.</p>
+            <Tabs.Panel className="pt-4" id="todo">
+              <div>
+                {isLoading && <div>Loading notes...</div>}
+
+                {todos.map(
+                  (todo) =>
+                    !todo.status && (
+                      <Task
+                        key={todo._id}
+                        todo={todo}
+                        onTaskUpdate={handleTaskUpdate}
+                        onTaskDelete={handleTaskDelete}
+                        
+                      />
+                    )
+                )}
+              </div>
             </Tabs.Panel>
-            <Tabs.Panel className="pt-4" id="analytics">
-              <p>Track your metrics and analyze performance data.</p>
-            </Tabs.Panel>
-            <Tabs.Panel className="pt-4" id="reports">
-              <p>Generate and download detailed reports.</p>
+            <Tabs.Panel className="pt-4" id="done">
+              <div>
+                {isLoading && <div>Loading notes...</div>}
+
+                {todos.map(
+                  (todo) =>
+                    todo.status && (
+                      <Task
+                        key={todo._id}
+                        todo={todo}
+                        onTaskUpdate={handleTaskUpdate}
+                        onTaskDelete={handleTaskDelete}
+                        
+                      />
+                    )
+                )}
+              </div>
             </Tabs.Panel>
           </Tabs>
-
-          <div>
-            {isLoading && <div>Loading notes...</div>}
-
-            {todos.map((todo) => (
-              <Task key={todo._id} task={todo.content} />
-            ))}
-          </div>
 
           <div className="flex w-max mx-auto mt-7">
             <button
