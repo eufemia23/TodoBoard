@@ -1,11 +1,17 @@
 import { ScrollText } from "lucide-react";
 import { VscGithubAlt } from "react-icons/vsc";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const handleHomeClick = () => {
+    navigate("/")
+  }
+
   return (
     <>
       <div className="flex justify-around text-indigo-900 mt-5">
-        <div className="font-title text-2xl flex">
+        <div className="font-title text-2xl flex cursor-pointer" onClick={handleHomeClick}>
           <ScrollText strokeWidth={1.6} className="mt-1 mr-2" />
           <div className="">TodoBoard</div>
         </div>

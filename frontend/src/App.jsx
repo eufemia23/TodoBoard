@@ -6,8 +6,9 @@ import DesktopSidebar from "./components/DesktopSidebar"
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import FoldersPage from "./pages/FoldersPage";
-import AddTodoModal from "./components/AddTodoModal";
-
+import RegisterPage from "./pages/RegisterPage"
+import LoginPage from "./pages/LoginPage";
+import CurrentUserPage from "./pages/CurrentUserPage";
 
 const App = () => {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= 768);
@@ -45,6 +46,9 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/folders" element={<FoldersPage />} />
+            <Route path="/register" element={<RegisterPage /> } />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/current" element={<CurrentUserPage />} />
           </Routes>
         </div>
       </div>

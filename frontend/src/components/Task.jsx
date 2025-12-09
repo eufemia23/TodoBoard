@@ -38,7 +38,7 @@ const Task = ({todo, onTaskUpdate, onTaskDelete}) => {
 
   return (
     <div>
-      <div className="flex gap-3 border border-gray-200 rounded-lg text-[15px] font-default font-light px-3 py-2 justify-between mb-3 shadow-xs hover:scale-103 hover:cursor-pointer transition duration-200 ease-smooth">
+      <div className="flex gap-3 border border-gray-200 shadow-xs rounded-lg text-[15px] font-default font-light px-3 py-2 justify-between mb-3  hover:scale-103 hover:cursor-pointer transition duration-200 ease-smooth">
         <div className="flex">
           {todo.status && (
             <Checkbox

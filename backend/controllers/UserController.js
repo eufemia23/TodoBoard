@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import User from "../models/userModel";
-import jwt from "jsonwebtoken"
+import User from "../models/userModel.js";
+import jsonwebtoken from "jsonwebtoken"
 
 //@desc register a user
 //@route POST /api/users/register
@@ -56,7 +56,7 @@ export async function loginUser(req, res) {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    const accessToken = jwt.sign(
+    const accessToken = jsonwebtoken.sign(
       {
         user: {
           username: user.username,
@@ -65,7 +65,7 @@ export async function loginUser(req, res) {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "5m" }
     );
     res.status(200).json({accessToken})
   } else {

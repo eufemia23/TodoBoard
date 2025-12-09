@@ -4,7 +4,6 @@ import api from "../lib/axios";
 
 
 const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
-
   const modalRef = useRef();
 
   const closeModal = (e) => {
@@ -12,34 +11,31 @@ const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
       onClose();
     }
   };
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isWarningDisplayed, setIsWarningDisplayed] = useState(false)
+  const [isWarningDisplayed, setIsWarningDisplayed] = useState(false);
 
   const status = false;
-  const folder = "first folder"
 
-   
+  //finish this by adding folders that users can choose
+  const folder = "first folder";
 
-
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!content.trim()) {
-      setIsWarningDisplayed(true)
+      setIsWarningDisplayed(true);
       return;
     }
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      await api.post("/todos", {content, status, folder});
-      onClose()
+      await api.post("/todos", { content, status, folder });
+      onClose();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-   }
-
-  
+  };
 
   return (
     <>
