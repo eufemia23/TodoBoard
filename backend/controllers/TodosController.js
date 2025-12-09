@@ -2,7 +2,7 @@ import Todo from "../models/todoModel.js"
 
 //@desc get all todos
 //@route GET /api/todos
-//@access public (should be private ofc)
+//@access private
 export async function getTodos(req, res) {
   try {
     const todos = await Todo.find().sort({createdAt:-1})
@@ -15,7 +15,7 @@ export async function getTodos(req, res) {
 
 //@desc get a todo
 //@route GET /api/todos/:id
-//@access public (should be private ofc)
+//@access private
 export async function getTodo(req, res) {
   try {
     const todo = await Todo.findById(req.params.id)
@@ -29,7 +29,7 @@ export async function getTodo(req, res) {
 
 //@desc create a todo
 //@route POST /api/todos
-//@access public (should be private ofc)
+//@access private
 export async function createTodo(req, res) {
   try {
     const content = req.body
@@ -44,7 +44,7 @@ export async function createTodo(req, res) {
 
 //@desc update a todo
 //@route PUT /api/todos/:id
-//@access public (should be private ofc)
+//@access private
 export async function updateTodo(req, res) {
   try {
     const content = req.body;
@@ -63,7 +63,7 @@ export async function updateTodo(req, res) {
 
 //@desc delete a todo
 //@route DELETE /api/todos/:id
-//@access public (should be private ofc)
+//@access private
 export async function deleteTodo(req, res) {
   try {
     const deletedTodo = await Todo.findByIdAndDelete(req.params.id)
