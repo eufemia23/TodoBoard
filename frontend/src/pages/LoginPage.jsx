@@ -23,13 +23,11 @@ const handleSubmit = async (e) => {
     const response = await api.post("/users/login", { email, password });
     const { accessToken, userId } = response.data;
     
-    // Store the token for future requests
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("userId", userId);
     
     console.log("logged in successfully") 
     
-    // Navigate to the user's tasks page
     navigate(`/tasks/${userId}`);
     
   } catch (error) {

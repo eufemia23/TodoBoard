@@ -28,15 +28,27 @@ export async function registerUser(req, res) {
     password: hashedPassword,
   });
 
+  const accessToken = jsonwebtoken.sign(
+    {
+      user: {
+        username: user.username,
+        email: user.email,
+        id: user.id,
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "24h" }
+  );
+
   console.log(`User created ${user}`); //delete after
+
   if (user) {
-    res.status(201).json({_id: user.id, email: user.email})
+    res.status(201).json({ accessToken, userId: user.id, email: user.email });
   } else {
     res.status(400);
     throw new Error("User data is not valid")
   }
 
-  res.json({message: "Register the user"})
 }
 
 

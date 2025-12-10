@@ -24,12 +24,20 @@ const RegisterPage = () => {
     }
     setIsLoading(true);
     try {
-      await api.post("/users/register", { username, email, password });
+      const response = await api.post("/users/register", { username, email, password });
+      const { accessToken, userId } = response.data;
+
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userId", userId);
+
+      console.log("registered successfully");
+
+      navigate(`/tasks/${userId}`);
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
-      navigate("/tasks");
+      
     }
   };
 
