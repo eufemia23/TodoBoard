@@ -1,9 +1,11 @@
 import { X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import api from "../lib/axios";
+import { useParams } from "react-router";
 
 
 const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
+   const { userid } = useParams();
   const modalRef = useRef();
 
   const closeModal = (e) => {
@@ -28,7 +30,12 @@ const AddTodoModal = ({isModalOpen, setIsModalOpen, onClose}) => {
     }
     setIsLoading(true);
     try {
-      await api.post("/todos", { content, status, folder });
+      await api.post(`/todos/${userid}`, {
+        user_id: userid,
+        content,
+        status,
+        folder,
+      });
       onClose();
     } catch (error) {
       console.log(error);

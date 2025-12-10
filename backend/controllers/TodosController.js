@@ -5,7 +5,7 @@ import Todo from "../models/todoModel.js"
 //@access private
 export async function getTodos(req, res) {
   try {
-    const todos = await Todo.find().sort({createdAt:-1})
+    const todos = await Todo.find({user_id: req.params.userid}).sort({ createdAt: -1 });
     res.status(200).json(todos)
   } catch (error) {
     console.error("Error in getTodos controller", error)
@@ -32,10 +32,21 @@ export async function getTodo(req, res) {
 //@access private
 export async function createTodo(req, res) {
   try {
-    const content = req.body
-    const todo = new Todo(content)
-    const savedTodo = await todo.save()
-    res.status(201).json(savedTodo)
+    const { content, status, folder } = req.body;
+
+    if (!content || !folder) {
+      return res.status(400).json({ message: "content and folder are required" });
+    }
+
+    const todo = new Todo({
+      content,
+      status,
+      folder,
+      user_id: req.params.userid,
+    });
+
+    const savedTodo = await todo.save();
+    res.status(201).json(savedTodo);
   } catch (error) {
     console.error("Error in createTodo controller", error);
     res.status(500).json({ message: "Internal server error" });
@@ -54,7 +65,7 @@ export async function updateTodo(req, res) {
       { new: true }
     );
     if (!updatedTodo) return res.status(404).json({ message: "Todo not found" });
-    res.status(200).json(updateTodo)
+    res.status(200).json(updatedTodo);
   } catch (error) {
     console.error("Error in updateTodo controller", error);
     res.status(500).json({ message: "Internal server error" });

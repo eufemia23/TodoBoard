@@ -10,6 +10,8 @@ const LoginPage = () => {
   const [displayEmptyFieldWarning, setDisplayEmptyFieldWarning] = useState(false);
   const [displayIncorrectWarning, setDisplayIncorrectWarning] = useState(false);
 
+
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   if (!email.trim() || !password.trim()) {
@@ -18,17 +20,27 @@ const handleSubmit = async (e) => {
   }
   setIsLoading(true);
   try {
-    await api.post("/users/login", { email, password });
+    const response = await api.post("/users/login", { email, password });
+    const { accessToken, userId } = response.data;
+    
+    // Store the token for future requests
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("userId", userId);
+    
     console.log("logged in successfully") 
-    navigate("/tasks");
+    
+    // Navigate to the user's tasks page
+    navigate(`/tasks/${userId}`);
+    
   } catch (error) {
     setDisplayIncorrectWarning(true)
     console.log(error);
   } finally {
     setIsLoading(false);
-   
   }
 };
+
+
 
   const handleSwitchClick = () => {
     navigate("/register");

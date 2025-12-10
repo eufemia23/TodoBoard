@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import { SquarePen } from "lucide-react";
 import { Trash } from "lucide-react";
 import api from "../lib/axios";
+import { useParams } from "react-router";
 
 const Task = ({todo, onTaskUpdate, onTaskDelete}) => {
+    const { userid } = useParams();
   const [updatedTask, setUpdatedTask] = useState(todo);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const Task = ({todo, onTaskUpdate, onTaskDelete}) => {
     try {
       const newTask = { ...updatedTask, status: !updatedTask.status };
       setUpdatedTask(newTask);
-      await api.put(`/todos/${todo._id}`, newTask);
+      await api.put(`/todos/${userid}/${todo._id}`, newTask);
       if (onTaskUpdate) {
         onTaskUpdate(newTask);
       }

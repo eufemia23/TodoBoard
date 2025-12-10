@@ -44,7 +44,7 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/tasks" element={<TasksPage />} />
+            <Route path="/tasks/:userid" element={<TasksPage />} />
             <Route path="/folders" element={<FoldersPage />} />
             <Route path="/register" element={<RegisterPage /> } />
             <Route path="/login" element={<LoginPage />} />

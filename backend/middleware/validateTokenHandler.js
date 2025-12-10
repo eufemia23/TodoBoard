@@ -1,6 +1,6 @@
 import jsonwebtoken from "jsonwebtoken"
 
-export async function validateToken(req, res) {
+export async function validateToken(req, res, next) {
   let token;
   let authHeader = req.headers.Authorization || req.headers.authorization;
   if (authHeader && authHeader.startsWith("Bearer")) {

@@ -4,8 +4,10 @@ import api from "../lib/axios";
 import { Tabs } from "@heroui/react";
 import { PlusIcon } from "lucide-react";
 import AddTodoModal from "../components/AddTodoModal";
+import { useParams } from "react-router";
 
 const TasksPage = () => {
+  const { userid } = useParams();
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +29,7 @@ const TasksPage = () => {
   const handleTaskDelete = async (deletedTodo) => {
     setTodos((prev) => prev.filter((t) => t._id !== deletedTodo._id));
     try {
-      const res = await api.get("/todos");
+      const res = await api.get(`/todos/${userid}`);
       setTodos(res.data);
     } catch (err) {
       console.error("Error refetching todos after delete", err);
@@ -41,7 +43,7 @@ const TasksPage = () => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const res = await api.get("/todos");
+        const res = await api.get(`/todos/${userid}`);
         setTodos(res.data);
       } catch (error) {
         console.log("Error fetching notes", error);
@@ -50,7 +52,7 @@ const TasksPage = () => {
       }
     };
     fetchTodos();
-  }, [isModalOpen]);
+  }, [userid, isModalOpen]);
 
   return (
     <div>

@@ -11,10 +11,10 @@ import {validateToken} from "../middleware/validateTokenHandler.js"
 const router = express.Router();
 router.use(validateToken)
 
-router.route("/").get(getTodos);
-router.route("/:id").get(getTodo);
-router.route("/").post(createTodo);
-router.route("/:id").put(updateTodo);
-router.route("/:id").delete(deleteTodo);
+router.route("/:userid").get(getTodos);
+router.route("/:userid/:id").get(getTodo);
+router.route("/:userid").post(createTodo);
+router.route("/:userid/:id").put(updateTodo);
+router.route("/:userid/:id").delete(deleteTodo);
 
 export default router;
