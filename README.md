@@ -15,9 +15,10 @@ The website is made up of a todo list that divides your todos into two categorie
 - [x] Deleting tasks
 - [ ] Editing tasks
 - [ ] Tasks get saved to localStorage if not logged in
-- [ ] Creating an account
-- [ ] Logging in
-- [ ] Tasks get saved to a DB if logged in
+- [x] Creating an account
+- [x] Logging in
+- [x] Tasks get saved to a DB if logged in
+- [x] Sidebar is different if logged in/not logged in
 - [ ] Folders page UI (logged in/not logged in)
 - [ ] Creating/deleting/editing folders
 - [ ] Folder component in the todo list that allows for switching folders
