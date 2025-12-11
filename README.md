@@ -22,5 +22,5 @@ The website is made up of a todo list that divides your todos into two categorie
 - [ ] Folders page UI (logged in/not logged in)
 - [ ] Creating/deleting/editing folders
 - [ ] Folder component in the todo list that allows for switching folders
-- [ ] Log out button functionality
+- [x] Log out button functionality
 
