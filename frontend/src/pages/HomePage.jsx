@@ -3,13 +3,17 @@
 const HomePage = () => {
   return (
     <div>
-      <div className="text-5xl mt-30 font-manrope text-indigo-900 font-semibold animate-appear">
-        <div className="mx-auto w-max">All of your tasks</div>
-        <div className=" mx-auto w-max mt-5">in one place</div>
-        <div className="font-normal font-default text-lg mx-auto w-100 mt-7 text-center">
-          Create folders, lists, and tasks. Manage your to-do's with a modern twist.
+      <div className="text-3xl md:text-5xl mt-30 font-manrope text-indigo-900 font-semibold animate-appear">
+        <div className="mx-auto w-max">Your whole workflow,</div>
+        <div className=" mx-auto w-max mt-5">in one clean space.</div>
+        <div className="font-normal font-default text-[17px] md:text-lg mx-auto w-70 md:w-100 mt-10 text-center">
+          Stay organized in a workspace that brings your tasks together with
+          clarity and ease. Use flexible folders to arrange your projects and
+          keep everything within reach.
         </div>
-        
+        <div className="font-semibold font-default text-[17px] md:text-lg mx-auto w-70 md:w-100 mt-10 text-center">
+          Simple tools, genuine impact.
+        </div>
       </div>
     </div>
   );
