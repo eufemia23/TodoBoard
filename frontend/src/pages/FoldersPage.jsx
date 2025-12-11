@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
 import api from "../lib/axios";
+import { LoaderCircle } from "lucide-react";
 
 
 const FoldersPage = () => {
   const [folders, setFolders] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   
 
   return (
     <div>
-      <div className="min-h-screen">
+      <div className="flex justify-center mt-10 ">
+        <div className="bg-white w-9/10 md:w-2/3 max-w-150 min-h-150 rounded-lg shadow-lg px-10 py-5">
+          <div className="text-[20px] mb-5 font-title">My Folders</div>
 
-        <div className="max-w-7xl mx-auto p-4 mt-6">
-          {isLoading && (
-            <div className="text-center text-primary py-10">
-              Loading folders...
+          {isLoading ? (
+            <div className="w-max mx-auto mt-7">
+              <LoaderCircle className="animate-spin mx-auto w-max size-20 text-gray-300 mb-5" />
+              <div className="text-lg font-default text-gray-400">
+                Loading your profile...
+              </div>
             </div>
-          )}
-
-          {folders.length === 0 && <div>No folders available</div>}
-
-          {folders.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {folders.map((folder) => (
-                <NoteCard key={folder._id} folder={folder} setFolders={setFolders} />
-              ))}
+          ) : (
+            <div>
+              <div className="flex w-max mx-auto mt-7">Nothing here yet...</div>
             </div>
           )}
         </div>
