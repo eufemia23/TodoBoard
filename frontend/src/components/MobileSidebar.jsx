@@ -24,7 +24,7 @@ const MobileSidebar = () => {
     if (localStorage.getItem("accessToken")) {
         setIsLoggedIn(true)
       } 
-  }, []);
+  });
 
   const handleExpandClick = () => {
     setIsExpanded(!isExpanded);
@@ -44,6 +44,13 @@ const MobileSidebar = () => {
       console.log(error);
     }
   };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("accessToken")
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false)
+    navigate("/");
+  }
 
   return (
     <div>
@@ -111,7 +118,7 @@ const MobileSidebar = () => {
                     </div>
                   </Link>
 
-                  <div className="border-b border-b-gray-200 px-1 py-2 ">
+                  <div className="border-b border-b-gray-200 px-1 py-2 " onClick={handleLogOut}>
                     <button className="hover:bg-indigo-800/30 hover:cursor-pointer transition duration-300 ease-smooth px-1 py-1 rounded-full hover:scale-110 inline-flex">
                       <LogOut strokeWidth={1.3} className="" />
 
