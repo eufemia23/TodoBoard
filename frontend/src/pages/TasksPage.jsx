@@ -11,7 +11,8 @@ const TasksPage = () => {
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
+
+  
 
   const handleAddTodo = () => {
     setIsModalOpen(true);
@@ -23,7 +24,6 @@ const TasksPage = () => {
         todo._id === updatedTask._id ? updatedTask : todo
       )
     );
-   
   };
 
   const handleTaskDelete = async (deletedTodo) => {
@@ -35,10 +35,6 @@ const TasksPage = () => {
       console.error("Error refetching todos after delete", err);
     }
   };
-
- 
-  
-
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -65,10 +61,10 @@ const TasksPage = () => {
       )}
 
       <div className="flex justify-center mt-10 ">
-        <div className="bg-white w-9/10 md:w-2/3 max-w-150 min-h-150 rounded-lg shadow-lg px-10 py-5 animate-appear">
+        <div className="bg-white w-9/10 md:w-2/3 max-w-150 min-h-150 rounded-lg shadow-lg px-10 py-5">
           <div className="text-[20px] mb-5 font-title">My Tasks</div>
 
-          <Tabs className="w-full max-w-130 font-default" >
+          <Tabs className="w-full max-w-130 font-default">
             <Tabs.ListContainer>
               <Tabs.List aria-label="Options">
                 <Tabs.Tab id="todo">
@@ -94,7 +90,6 @@ const TasksPage = () => {
                         todo={todo}
                         onTaskUpdate={handleTaskUpdate}
                         onTaskDelete={handleTaskDelete}
-                        
                       />
                     )
                 )}
@@ -112,7 +107,6 @@ const TasksPage = () => {
                         todo={todo}
                         onTaskUpdate={handleTaskUpdate}
                         onTaskDelete={handleTaskDelete}
-                        
                       />
                     )
                 )}

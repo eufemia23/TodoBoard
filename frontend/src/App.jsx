@@ -9,6 +9,7 @@ import FoldersPage from "./pages/FoldersPage";
 import RegisterPage from "./pages/RegisterPage"
 import LoginPage from "./pages/LoginPage";
 import CurrentUserPage from "./pages/CurrentUserPage";
+import TasksPageNotLoggedIn from "./pages/TaskPageNotLoggedIn";
 
 const App = () => {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= 768);
@@ -44,9 +45,10 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/tasks" element={<TasksPageNotLoggedIn />} />
             <Route path="/tasks/:userid" element={<TasksPage />} />
             <Route path="/folders" element={<FoldersPage />} />
-            <Route path="/register" element={<RegisterPage /> } />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/current" element={<CurrentUserPage />} />
           </Routes>
