@@ -45,6 +45,19 @@ const MobileSidebar = () => {
     }
   };
 
+   const handleProfileClick = async (e) => {
+     e.preventDefault();
+     try {
+       if (localStorage.getItem("accessToken")) {
+         const userId = localStorage.getItem("userId");
+         navigate(`/current/${userId}`);
+         console.log(userId); //delete
+       }
+     } catch (error) {
+       console.log(error);
+     }
+   };
+
   const handleLogOut = () => {
     localStorage.removeItem("accessToken")
     localStorage.removeItem("userId");
@@ -109,7 +122,7 @@ const MobileSidebar = () => {
 
               {isLoggedIn ? (
                 <div>
-                  <Link to={"/current"}>
+                  <Link to={"/current"} onClick={handleProfileClick}>
                     <div className="border-b border-b-gray-200 px-1 py-2">
                       <div className="hover:bg-indigo-800/30 hover:cursor-pointer transition duration-300 ease-smooth px-1 py-1 rounded-full hover:scale-110 inline-flex">
                         <CircleUserRound strokeWidth={1.3} className="" />
@@ -118,7 +131,10 @@ const MobileSidebar = () => {
                     </div>
                   </Link>
 
-                  <div className="border-b border-b-gray-200 px-1 py-2 " onClick={handleLogOut}>
+                  <div
+                    className="border-b border-b-gray-200 px-1 py-2 "
+                    onClick={handleLogOut}
+                  >
                     <button className="hover:bg-indigo-800/30 hover:cursor-pointer transition duration-300 ease-smooth px-1 py-1 rounded-full hover:scale-110 inline-flex">
                       <LogOut strokeWidth={1.3} className="" />
 

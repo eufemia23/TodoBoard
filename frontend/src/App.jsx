@@ -50,7 +50,7 @@ const App = () => {
             <Route path="/folders" element={<FoldersPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/current" element={<CurrentUserPage />} />
+            <Route path="/current/:userid" element={<CurrentUserPage />} />
           </Routes>
         </div>
       </div>

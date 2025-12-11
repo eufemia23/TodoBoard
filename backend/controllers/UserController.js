@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
-import jsonwebtoken from "jsonwebtoken"
+import jsonwebtoken from "jsonwebtoken";
 
 //@desc register a user
 //@route POST /api/users/register
@@ -46,13 +46,9 @@ export async function registerUser(req, res) {
     res.status(201).json({ accessToken, userId: user.id, email: user.email });
   } else {
     res.status(400);
-    throw new Error("User data is not valid")
+    throw new Error("User data is not valid");
   }
-
 }
-
-
-
 
 //@desc log in a user
 //@route POST /api/users/login
@@ -79,18 +75,24 @@ export async function loginUser(req, res) {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "24h" }
     );
-    
-    res.status(200).json({accessToken, userId: user.id})
-  } else {
-    res.status(401)
-    throw new Error("Email or password is not valid")
-  }
 
+    res.status(200).json({ accessToken, userId: user.id });
+  } else {
+    res.status(401);
+    throw new Error("Email or password is not valid");
+  }
 }
 
 //@desc show current user
 //@route GET /api/users/current
 //@access private
 export async function currentUser(req, res) {
-  res.json(req.user.id);
+  try {
+    const user = await User.findById(req.params.userid);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error in getUser controller", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 }

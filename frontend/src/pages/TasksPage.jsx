@@ -2,7 +2,7 @@ import Task from "../components/Task";
 import { useEffect, useState } from "react";
 import api from "../lib/axios";
 import { Tabs } from "@heroui/react";
-import { PlusIcon } from "lucide-react";
+import { LoaderCircle, PlusIcon } from "lucide-react";
 import AddTodoModal from "../components/AddTodoModal";
 import { useParams } from "react-router";
 
@@ -80,7 +80,14 @@ const TasksPage = () => {
             </Tabs.ListContainer>
             <Tabs.Panel className="pt-4" id="todo">
               <div>
-                {isLoading && <div>Loading notes...</div>}
+                {isLoading && (
+                  <div className="w-max mx-auto mt-7">
+                    <LoaderCircle className="animate-spin mx-auto w-max size-20 text-gray-300 mb-5" />
+                    <div className="text-lg font-default text-gray-400">
+                      Loading your tasks...
+                    </div>
+                  </div>
+                )}
 
                 {todos.map(
                   (todo) =>
@@ -97,7 +104,14 @@ const TasksPage = () => {
             </Tabs.Panel>
             <Tabs.Panel className="pt-4" id="done">
               <div>
-                {isLoading && <div>Loading notes...</div>}
+                {isLoading && (
+                  <div className="w-max mx-auto mt-7">
+                    <LoaderCircle className="animate-spin mx-auto w-max size-20 text-gray-300 mb-5" />
+                    <div className="text-lg font-default text-gray-400">
+                      Loading your tasks...
+                    </div>
+                  </div>
+                )}
 
                 {todos.map(
                   (todo) =>

@@ -1,21 +1,20 @@
-import jsonwebtoken from "jsonwebtoken"
+import jsonwebtoken from "jsonwebtoken";
 
-export async function validateToken(req, res, next) {
-  let token;
-  let authHeader = req.headers.Authorization || req.headers.authorization;
-  if (authHeader && authHeader.startsWith("Bearer")) {
-    token = authHeader.split(" ")[1];
-    jsonwebtoken.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        res.status(401);
-        throw new Error("User is not authorized");
-      }
-      req.user = decoded.user;
-      next();
-    });
-    if (!token) {
+export function validateToken(req, res, next) {
+  try {
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       res.status(401);
-      throw new Error("User is not authorized or token is missing.");
+      return res.json({ message: "User is not authorized or token is missing." });
     }
+
+    const token = authHeader.split(" ")[1];
+    const decoded = jsonwebtoken.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    req.user = decoded.user;
+    return next();
+  } catch (err) {
+    console.error("Token validation error:", err.message || err);
+    res.status(401);
+    return res.json({ message: "User is not authorized" });
   }
 }

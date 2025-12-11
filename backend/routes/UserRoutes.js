@@ -7,10 +7,10 @@ import {
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
 const router = express.Router();
-router.get("/current", validateToken, currentUser)
 
-router.route("/current").get(currentUser);
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
+
+router.route("/current/:userid").get(validateToken, currentUser);
 
 export default router;
