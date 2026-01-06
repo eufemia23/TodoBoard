@@ -16,12 +16,7 @@ const port = process.env.PORT || 5000;
 
 
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+
 
 if (process.env.NODE_ENV !== "production") {
   app.use(
@@ -34,6 +29,13 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.json());
 app.use("/api/todos", TodosRoutes);
 app.use("/api/users", UserRoutes)
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.get("/files{/*path}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 connectDb().then(() => {
   app.listen(port, () => {
