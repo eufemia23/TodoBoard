@@ -1,0 +1,22 @@
+{
+  "name": "to-do-list-fullstack",
+  "version": "1.0.0",
+  "description": "This is my first fullstack project. I finished learning backend concepts and wanted to practice them by creating a Todo List Website.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eufemia23/TodoBoard.git"
+  },
+  "keywords": [],
+  "author": "Aurelia Ossowska",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eufemia23/TodoBoard/issues"
+  },
+  "homepage": "https://github.com/eufemia23/TodoBoard#readme"
+}

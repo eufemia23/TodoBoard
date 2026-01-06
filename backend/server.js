@@ -4,12 +4,32 @@ import cors from "cors"
 import TodosRoutes from "./routes/TodosRoutes.js";
 import UserRoutes from "./routes/UserRoutes.js"
 import { connectDb } from "./config/dbConnection.js";
+import path from "path";
 
 dotenv.config();
 
+const __dirname = path.resolve();
+
 const app = express();
 const port = process.env.PORT || 5000;
-app.use(cors());
+
+
+
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
+if (process.env.NODE_ENV !== "production") {
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+    })
+  );
+}
 
 app.use(express.json());
 app.use("/api/todos", TodosRoutes);
@@ -20,3 +40,5 @@ connectDb().then(() => {
     console.log(`Server running on port: ${port}`);
   });
 });
+
+
