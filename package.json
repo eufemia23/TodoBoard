@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/eufemia23/TodoBoard/issues"
   },
-  "homepage": "https://github.com/eufemia23/TodoBoard#readme"
+  "homepage": "https://github.com/eufemia23/TodoBoard#readme",
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.4"
+  }
 }
